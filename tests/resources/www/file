@@ -1,0 +1,8 @@
+<!doctype html>
+<title>Home</title>
+
+File
+
+<p><a href="/dir/text.txt">Dir Text</a></p>
+<b href="/nolink">No Link</b>
+<!--<a href="/nolink">No Link</a>-->

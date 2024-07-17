@@ -1,0 +1,15 @@
+.htaccess
+dir
+file
+index.html
+text.txt
+
+./dir:
+index.html
+sub
+
+./dir/sub:
+index.html
+
+./file:
+index.html

@@ -1,0 +1,31 @@
+{
+	"name": "tjm/static-web-tasks"
+	,"description": "Task to build a static version of a site for 'tjm/task-runner'"
+	,"authors": [
+		{
+			"name": "Toby Mackenzie"
+			,"email": "public@tobymackenzie.com"
+			,"homepage": "https://www.tobymackenzie.com"
+		}
+	]
+	,"license": "0BSD"
+	,"autoload": {
+		"psr-4": {
+			"TJM\\StaticWebTasks\\": "src"
+		}
+	}
+	,"autoload-dev": {
+		"psr-4": {
+			"TJM\\StaticWebTasks\\Tests\\": "tests"
+		}
+	}
+	,"require": {
+		"php": ">=5.6"
+		,"tjm/task-runner": "^0"
+		,"tjm/web-crawler": "^0.1"
+	}
+	,"require-dev": {
+		"tjm/dev": "^1"
+	}
+}
+
