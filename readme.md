@@ -8,7 +8,7 @@ use TJM\StaticWebTasks\Task;
 $task = new Task([
 	'host'=> 'example.com',
 	'scheme'=> 'https',
-], __DIR__ . '/tmp', [
+], __DIR__ . '/output-dir', [
 	'exclude'=> ['/.htaccess'],
 ]);
 $task->do();
