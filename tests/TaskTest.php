@@ -13,15 +13,21 @@ class TaskTest extends TestCase{
 		exec('rm -r ' . $this->dir);
 	}
 	public function test(){
-		//--create exclude file
+		//--create exclude files
 		file_put_contents($this->dir . '/.htaccess', 'RewriteEngine On');
+		mkdir($this->dir . '/d');
+		file_put_contents($this->dir . '/d/a.txt', 'Apple');
+		file_put_contents($this->dir . '/d/b.txt', 'Banana');
 		//--create remove file
 		file_put_contents($this->dir . '/asdf.txt', 'A S D F');
 
 		$task = new Task([
 			'client'=> 'php ' . $this->webDir . '/index.php',
 		], $this->dir, [
-			'exclude'=> ['/.htaccess'],
+			'exclude'=> [
+				'/.htaccess',
+				'/d/*',
+			],
 		]);
 		$task->do();
 		chdir($this->dir);
