@@ -12,9 +12,6 @@ class Task extends Base{
 	protected string $destination;
 	//--exclude: files to exclude during sync, eg files that should remain in destination without being deleted.  will be attached as `--exclude` opts to `rsync`
 	protected array $exclude = [];
-	//--follow: whether to crawl content for `href` in resulting html to add more urls to follow
-	//-!! follow should be option on crawler?
-	protected bool $follow = true;
 	// ?headers(bool): whether to store response headers.  not needed for normal use, how to store?
 	// ?outputFormat: output format to store files in dest
 		// would affect things like directory structure, eg `/about` vs `/about/index.html`
@@ -71,7 +68,7 @@ class Task extends Base{
 		shell_exec("rsync {$syncOpts} {$this->destination}/ {$tmpDir}/");
 
 		//--crawl
-		$this->crawler->crawl($this->paths, $this->follow);
+		$this->crawler->crawl($this->paths);
 
 		//--build static files
 		$buildPaths = [];

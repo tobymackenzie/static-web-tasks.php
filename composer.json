@@ -22,7 +22,7 @@
 	,"require": {
 		"php": ">=5.6"
 		,"tjm/task-runner": "^0"
-		,"tjm/web-crawler": "^0.1"
+		,"tjm/web-crawler": "^0.2"
 	}
 	,"require-dev": {
 		"tjm/dev": "^1"
