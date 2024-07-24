@@ -118,7 +118,7 @@ class Task extends Base{
 			}
 		}
 		//--remove empty dirs, eg when removing page
-		shell_exec("find {$tmpDir} -d -empty -delete");
+		shell_exec("find {$tmpDir} -type d -empty -delete");
 
 
 		//--sync to destination
