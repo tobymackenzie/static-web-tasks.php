@@ -20,6 +20,8 @@ class TaskTest extends TestCase{
 		file_put_contents($this->dir . '/d/b.txt', 'Banana');
 		//--create remove file
 		file_put_contents($this->dir . '/asdf.txt', 'A S D F');
+		//--create remove dir
+		mkdir($this->dir . '/asdf');
 
 		$task = new Task([
 			'client'=> 'php ' . $this->webDir . '/index.php',

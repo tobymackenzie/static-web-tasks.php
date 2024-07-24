@@ -117,6 +117,9 @@ class Task extends Base{
 				unlink($file->getPathname());
 			}
 		}
+		//--remove empty dirs, eg when removing page
+		shell_exec("find {$tmpDir} -d -empty -delete");
+
 
 		//--sync to destination
 		shell_exec("rsync {$syncOpts} --delete {$tmpDir}/ {$this->destination}/");
