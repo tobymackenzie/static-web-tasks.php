@@ -1,7 +1,8 @@
 .htaccess
 d
 dir
-file
+dir.html
+file.html
 index.html
 text.txt
 
@@ -10,11 +11,4 @@ a.txt
 b.txt
 
 ./dir:
-index.html
-sub
-
-./dir/sub:
-index.html
-
-./file:
-index.html
+sub.html

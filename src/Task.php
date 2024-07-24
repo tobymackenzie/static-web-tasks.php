@@ -7,6 +7,9 @@ use TJM\TaskRunner\Task as Base;
 use TJM\WebCrawler\Crawler;
 
 class Task extends Base{
+	const FORMAT_NODES_DOT_HTML = 1;
+	const FORMAT_NODES_INDEX = 2;
+
 	protected ?Crawler $crawler;
 	//--destination: path where static build will go
 	protected string $destination;
@@ -85,7 +88,14 @@ class Task extends Base{
 				}elseif(pathinfo($path, PATHINFO_EXTENSION)){
 					$fileDest = $path;
 				}else{
-					$fileDest = $path . '/index.html';
+					switch($this->getFormatForNodes()){
+						case self::FORMAT_NODES_DOT_HTML:
+							$fileDest = $path . '.html';
+						break;
+						case self::FORMAT_NODES_INDEX:
+							$fileDest = $path . '/index.html';
+						break;
+					}
 				}
 				$pathDest = $tmpDir . $fileDest;
 				exec('mkdir -p ' . dirname($pathDest));
@@ -113,5 +123,10 @@ class Task extends Base{
 
 		//--clean up
 		passthru('rm -r ' . $tmpDir);
+	}
+
+	//==conf
+	protected function getFormatForNodes(){
+		return self::FORMAT_NODES_DOT_HTML;
 	}
 }
