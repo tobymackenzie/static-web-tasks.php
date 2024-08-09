@@ -15,15 +15,8 @@ class Task extends Base{
 	protected string $destination;
 	//--exclude: files to exclude during sync, eg files that should remain in destination without being deleted.  will be attached as `--exclude` opts to `rsync`
 	protected array $exclude = [];
-	// ?headers(bool): whether to store response headers.  not needed for normal use, how to store?
-	// ?outputFormat: output format to store files in dest
-		// would affect things like directory structure, eg `/about` vs `/about/index.html`
-		// redirects would be different between github and cloudflare pages formats
 	//--paths: urls / path(s) to get content from
 	protected array $paths = ['/'];
-	// query(string): querystring params to add to all http requests
-		// useful if we want site to have certain modifications for static export
-		// determined automatically from entries if urls and not otherwise set
 	//--syncOpts: opts to pass to `rsync`
 	protected ?string $syncOpts = '-a';
 
@@ -41,20 +34,6 @@ class Task extends Base{
 		$this->destination = $destination;
 	}
 	public function do(){
-		/*
-		loop through paths via `shell_exec` or `curl`, save to file
-		need to not update dest files if unchanged (for rsync to elsewhere)
-		need to monitor paths that still exist, remove dest files that should no longer be there
-
-		rsync from dest to tmp (with excludes to prevent extra data)
-		gets content into string, compares to content of existing file, if different, write
-		remove any files not in list
-		rsync back to dest, with excludes, delete options enabled
-			maybe allow dry run with output to show what would be copied / removed
-			maybe use git repo on tmp so we can see what has changed
-				init with all files after first rsync
-				commit when done
-		*/
 		//--build into temporary directory
 		//-# so we aren't modifying in place
 		//-# also needed to support remote destinations
@@ -111,7 +90,6 @@ class Task extends Base{
 		$removeLength = strlen($tmpDir);
 		$glob = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS));
 		foreach($glob as $file){
-			// if($glob->isDot()) continue;
 			$path = substr($file->getPathname(), $removeLength);
 			if(!in_array($path, $buildPaths)){
 				unlink($file->getPathname());
