@@ -42,8 +42,10 @@ class Task extends Base{
 
 		//--build sync opts
 		$syncOpts = $this->syncOpts;
-		foreach($this->exclude as $exclude){
-			$syncOpts .= ' --exclude=' . escapeshellarg($exclude);
+		if(!empty($this->exclude)){
+			$excludeFile = $tmpDir . '.exclude';
+			file_put_contents($excludeFile, implode("\n", $this->exclude));
+			$syncOpts .= ' --exclude-from=' . escapeshellarg($excludeFile);
 		}
 
 		//--sync current structure to tmp dir
@@ -104,6 +106,9 @@ class Task extends Base{
 
 		//--clean up
 		passthru('rm -r ' . $tmpDir);
+		if(!empty($excludeFile)){
+			unlink($excludeFile);
+		}
 	}
 
 	//==conf
