@@ -25,7 +25,7 @@
 		,"tjm/web-crawler": "^0.2"
 	}
 	,"require-dev": {
-		"tjm/dev": "^1"
+		"tjm/dev": "*"
 	}
 }
 
