@@ -62,6 +62,10 @@ class SinglePathTask extends Base{
 			case 200:
 				$content = $response->getContent();
 				if(!file_exists($pathDest) || $content !== file_get_contents($pathDest)){
+					$dir = pathinfo($pathDest, PATHINFO_DIRNAME);
+					if(!file_exists($dir)){
+						shell_exec('mkdir -p ' . escapeshellarg($dir));
+					}
 					file_put_contents($pathDest, $content);
 				}
 			break;
